@@ -12,6 +12,10 @@
 #import "GNAPIKeys.h"
 #import "NSObject+BlockObservation.h"
 
+#import <AddressBook/ABAddressBook.h>
+#import <AddressBook/ABPerson.h>
+#import <AddressBook/ABImageLoading.h>
+
 @interface GNMailFetchManager ()
 
 @property (strong) NSStatusItem *statusItem;
@@ -115,6 +119,8 @@ NSString * currentTimeString() {
 		[fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
 			if (!error) {
 				NSXMLDocument *response = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyXML error:nil];
+                
+                ABAddressBook *addressBook = [ABAddressBook sharedAddressBook];
 				
 				int numMessages = [[[response.rootElement elementsForName:@"fullcount"][0] stringValue] intValue];
 				if (numMessages == 0) {
@@ -132,7 +138,7 @@ NSString * currentTimeString() {
 					NSMutableArray *notificationsToBeDelivered = [[NSMutableArray alloc] initWithCapacity:1];
 					for (NSXMLElement *element in [response.rootElement elementsForName:@"entry"]) {
 						NSUserNotification *notification = [[NSUserNotification alloc] init];
-						notification.soundName = @"mail_new";
+//                        notification.soundName = @"mail_new";
 						
 						// Try to set the notification date to the message date
 						NSDate *messageDate = [NSDate date];
@@ -163,6 +169,7 @@ NSString * currentTimeString() {
 						if ([element elementsForName:@"author"].count > 0) {
 							NSString *subtitle = @"";
 							BOOL emailParens = NO;
+                            NSXMLElement *author = [element elementsForName:@"author"][0];
 							if ([[element elementsForName:@"author"][0] elementsForName:@"name"].count > 0) {
 								subtitle = [[[element elementsForName:@"author"][0] elementsForName:@"name"][0] stringValue];
 								emailParens = YES;
@@ -174,6 +181,27 @@ NSString * currentTimeString() {
 									subtitle = [[[element elementsForName:@"author"][0] elementsForName:@"email"][0] stringValue];
 							}
 							notification.subtitle = subtitle;
+                            
+                            // Also try to get a picture from the Address Book for the author
+                            if ([author elementsForName:@"email"].count)
+                            {
+                                NSString *email = [[author elementsForName:@"email"][0] stringValue];
+                                NSArray *results = [addressBook recordsMatchingSearchElement:
+                                                    [ABPerson searchElementForProperty:kABEmailProperty
+                                                                                 label:nil
+                                                                                   key:nil
+                                                                                 value:email
+                                                                            comparison:kABEqualCaseInsensitive]];
+                                if (results.count)
+                                {
+                                    ABPerson *contact = (ABPerson*) [results objectAtIndex:0];
+                                    if([contact imageData]) {
+                                        NSImage *image = [[NSImage alloc] initWithData:[contact imageData]];
+                                        image.scalesWhenResized = YES;
+                                        notification.contentImage = image;
+                                    }
+                                }
+                            }
 						}
 						
 						// If the user doesn't want snippets, don't set any informative text, otherwise try to set the the informative

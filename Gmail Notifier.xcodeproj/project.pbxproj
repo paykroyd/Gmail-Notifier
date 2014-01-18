@@ -30,6 +30,7 @@
 		1AAD503316937B4D00FF3658 /* mail.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1AAD503016937B4D00FF3658 /* mail.pdf */; };
 		1ACAF72E1693A4AE0002700B /* GNMailFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACAF72D1693A4AE0002700B /* GNMailFetchManager.m */; };
 		1AE7976818405F230024E2B0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE7976718405F230024E2B0 /* WebKit.framework */; };
+		B3067DE3188B2F6600372B06 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3067DE2188B2F6600372B06 /* AddressBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -83,6 +84,7 @@
 		1ACAF72D1693A4AE0002700B /* GNMailFetchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNMailFetchManager.m; sourceTree = "<group>"; };
 		1AE7976718405F230024E2B0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		903DE69CF5F645C2A264500A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		B3067DE2188B2F6600372B06 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		B67609A5C31F4106BD784A91 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3067DE3188B2F6600372B06 /* AddressBook.framework in Frameworks */,
 				1AAD501116937B1300FF3658 /* Cocoa.framework in Frameworks */,
 				1AE7976818405F230024E2B0 /* WebKit.framework in Frameworks */,
 				0C51F03124044B94ABB53C3A /* libPods.a in Frameworks */,
@@ -142,6 +145,7 @@
 		1AAD500F16937B1300FF3658 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3067DE2188B2F6600372B06 /* AddressBook.framework */,
 				1AAD501016937B1300FF3658 /* Cocoa.framework */,
 				1AE7976718405F230024E2B0 /* WebKit.framework */,
 				1AAD501216937B1300FF3658 /* Other Frameworks */,
@@ -164,12 +168,12 @@
 			isa = PBXGroup;
 			children = (
 				1AAD502216937B1300FF3658 /* GNAppDelegate.h */,
-				1AAD502316937B1300FF3658 /* GNAppDelegate.m */,
 				1A852E5D16A1DAC900D5F2E6 /* GNMailAccountManager.h */,
 				1A852E5E16A1DAC900D5F2E6 /* GNMailAccountManager.m */,
 				1ACAF72C1693A4AE0002700B /* GNMailFetchManager.h */,
 				1ACAF72D1693A4AE0002700B /* GNMailFetchManager.m */,
 				1A852E6416A1DB2800D5F2E6 /* GNUtils.h */,
+				1AAD502316937B1300FF3658 /* GNAppDelegate.m */,
 				1A852E6516A1DB2800D5F2E6 /* GNUtils.m */,
 				1A64978016973EA50066CA4D /* GNAPIKeys.h */,
 				1A64978116973EA50066CA4D /* GNAPIKeys.m */,
