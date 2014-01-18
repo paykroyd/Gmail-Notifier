@@ -31,6 +31,7 @@
 		1ACAF72E1693A4AE0002700B /* GNMailFetchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACAF72D1693A4AE0002700B /* GNMailFetchManager.m */; };
 		1AE7976818405F230024E2B0 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE7976718405F230024E2B0 /* WebKit.framework */; };
 		B3067DE3188B2F6600372B06 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B3067DE2188B2F6600372B06 /* AddressBook.framework */; };
+		B3067DE6188B3F1500372B06 /* GNContactUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B3067DE5188B3F1500372B06 /* GNContactUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -85,6 +86,8 @@
 		1AE7976718405F230024E2B0 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		903DE69CF5F645C2A264500A /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B3067DE2188B2F6600372B06 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B3067DE4188B3F1500372B06 /* GNContactUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GNContactUtils.h; sourceTree = "<group>"; };
+		B3067DE5188B3F1500372B06 /* GNContactUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GNContactUtils.m; sourceTree = "<group>"; };
 		B67609A5C31F4106BD784A91 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,8 +176,10 @@
 				1ACAF72C1693A4AE0002700B /* GNMailFetchManager.h */,
 				1ACAF72D1693A4AE0002700B /* GNMailFetchManager.m */,
 				1A852E6416A1DB2800D5F2E6 /* GNUtils.h */,
-				1AAD502316937B1300FF3658 /* GNAppDelegate.m */,
 				1A852E6516A1DB2800D5F2E6 /* GNUtils.m */,
+				B3067DE4188B3F1500372B06 /* GNContactUtils.h */,
+				B3067DE5188B3F1500372B06 /* GNContactUtils.m */,
+				1AAD502316937B1300FF3658 /* GNAppDelegate.m */,
 				1A64978016973EA50066CA4D /* GNAPIKeys.h */,
 				1A64978116973EA50066CA4D /* GNAPIKeys.m */,
 				1A19257F169742BE00553108 /* MainMenu.xib */,
@@ -350,6 +355,7 @@
 				1ACAF72E1693A4AE0002700B /* GNMailFetchManager.m in Sources */,
 				1A403A5D169506460055D43B /* GNGeneralPreferencesViewController.m in Sources */,
 				1A1C9EE7169538B20044D4DC /* GNAccountPreferencesViewController.m in Sources */,
+				B3067DE6188B3F1500372B06 /* GNContactUtils.m in Sources */,
 				1A64978216973EA50066CA4D /* GNAPIKeys.m in Sources */,
 				1A852E5F16A1DAC900D5F2E6 /* GNMailAccountManager.m in Sources */,
 				1A852E6616A1DB2800D5F2E6 /* GNUtils.m in Sources */,

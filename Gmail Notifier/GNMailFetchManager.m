@@ -11,8 +11,8 @@
 #import "GNUtils.h"
 #import "GNAPIKeys.h"
 #import "NSObject+BlockObservation.h"
+#import "GNContactUtils.h"
 
-#import <AddressBook/ABAddressBook.h>
 #import <AddressBook/ABPerson.h>
 #import <AddressBook/ABImageLoading.h>
 
@@ -119,8 +119,6 @@ NSString * currentTimeString() {
 		[fetcher beginFetchWithCompletionHandler:^(NSData *data, NSError *error) {
 			if (!error) {
 				NSXMLDocument *response = [[NSXMLDocument alloc] initWithData:data options:NSXMLDocumentTidyXML error:nil];
-                
-                ABAddressBook *addressBook = [ABAddressBook sharedAddressBook];
 				
 				int numMessages = [[[response.rootElement elementsForName:@"fullcount"][0] stringValue] intValue];
 				if (numMessages == 0) {
@@ -170,36 +168,25 @@ NSString * currentTimeString() {
 							NSString *subtitle = @"";
 							BOOL emailParens = NO;
                             NSXMLElement *author = [element elementsForName:@"author"][0];
-							if ([[element elementsForName:@"author"][0] elementsForName:@"name"].count > 0) {
-								subtitle = [[[element elementsForName:@"author"][0] elementsForName:@"name"][0] stringValue];
+							if ([author elementsForName:@"name"].count > 0) {
+								subtitle = [[author elementsForName:@"name"][0] stringValue];
 								emailParens = YES;
 							}
-							if ([[element elementsForName:@"author"][0] elementsForName:@"email"].count > 0) {
+							if ([author elementsForName:@"email"].count > 0) {
 								if (emailParens)
-									subtitle = [NSString stringWithFormat:@"%@ (%@)", subtitle, [[[element elementsForName:@"author"][0] elementsForName:@"email"][0] stringValue]];
+									subtitle = [NSString stringWithFormat:@"%@ (%@)", subtitle, [[author elementsForName:@"email"][0] stringValue]];
 								else
-									subtitle = [[[element elementsForName:@"author"][0] elementsForName:@"email"][0] stringValue];
+									subtitle = [[author elementsForName:@"email"][0] stringValue];
 							}
 							notification.subtitle = subtitle;
                             
                             // Also try to get a picture from the Address Book for the author
                             if ([author elementsForName:@"email"].count)
                             {
-                                NSString *email = [[author elementsForName:@"email"][0] stringValue];
-                                NSArray *results = [addressBook recordsMatchingSearchElement:
-                                                    [ABPerson searchElementForProperty:kABEmailProperty
-                                                                                 label:nil
-                                                                                   key:nil
-                                                                                 value:email
-                                                                            comparison:kABEqualCaseInsensitive]];
-                                if (results.count)
+                                ABPerson *contact = findPersonByEmail([[author elementsForName:@"email"][0] stringValue]);
+                                if (contact && contact.imageData)
                                 {
-                                    ABPerson *contact = (ABPerson*) [results objectAtIndex:0];
-                                    if([contact imageData]) {
-                                        NSImage *image = [[NSImage alloc] initWithData:[contact imageData]];
-                                        image.scalesWhenResized = YES;
-                                        notification.contentImage = image;
-                                    }
+                                    notification.contentImage = [[NSImage alloc] initWithData:contact.imageData];
                                 }
                             }
 						}
