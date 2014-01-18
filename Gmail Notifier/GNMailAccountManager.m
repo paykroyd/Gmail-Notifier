@@ -19,7 +19,9 @@ static GNMailAccountManager *sharedAccountManager = nil;
 		sharedAccountManager = [[super allocWithZone:NULL] init];
 		
 		// Try to see if a token is stored in the user's keychain
-		GTMOAuth2Authentication *potentialAuthentication = [GTMOAuth2WindowController authForGoogleFromKeychainForName:GNOAuth2KeychainItemName clientID:GNOAuth2ClientID clientSecret:GNOAuth2ClientSecret];
+		GTMOAuth2Authentication *potentialAuthentication = [GTMOAuth2WindowController authForGoogleFromKeychainForName:GNOAuth2KeychainItemName
+                                                                                                              clientID:GNOAuth2ClientID
+                                                                                                          clientSecret:GNOAuth2ClientSecret];
 		if (potentialAuthentication != nil && [potentialAuthentication canAuthorize]) {
 			sharedAccountManager.authentication = potentialAuthentication;
 			[[NSNotificationCenter defaultCenter] postNotificationName:GNAuthDidChangeNotification object:self];
@@ -31,7 +33,11 @@ static GNMailAccountManager *sharedAccountManager = nil;
 
 // Creates a new GTMOAuth2WindowController and handles the response.
 - (void)attemptMailAccountLoginWithWindow:(NSWindow *)windowOrNil {
-	GTMOAuth2WindowController *windowController = [[GTMOAuth2WindowController alloc] initWithScope:GNOAuth2Scope clientID:GNOAuth2ClientID clientSecret:GNOAuth2ClientSecret keychainItemName:GNOAuth2KeychainItemName resourceBundle:[NSBundle bundleForClass:[GTMOAuth2WindowController class]]];
+	GTMOAuth2WindowController *windowController = [[GTMOAuth2WindowController alloc] initWithScope:GNOAuth2Scope
+                                                                                          clientID:GNOAuth2ClientID
+                                                                                      clientSecret:GNOAuth2ClientSecret
+                                                                                  keychainItemName:GNOAuth2KeychainItemName
+                                                                                    resourceBundle:[NSBundle bundleForClass:[GTMOAuth2WindowController class]]];
 	[windowController signInSheetModalForWindow:windowOrNil completionHandler:^(GTMOAuth2Authentication *anAuthentication, NSError *anError) {
 		if (anError != nil) {
 			NSAlert *alert = nil;
